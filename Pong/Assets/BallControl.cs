@@ -8,6 +8,7 @@ public class BallControl : MonoBehaviour
 
     public float xInitialForce;
     public float yInitialForce;
+    public float maxSpeed = 10f;
 
     private Vector2 trajectoryOrigin;
 
@@ -16,6 +17,11 @@ public class BallControl : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         RestartGame();
         trajectoryOrigin = transform.position;
+    }
+
+    private void FixedUpdate()
+    {
+        rb.velocity = rb.velocity.magnitude != maxSpeed ? rb.velocity.normalized * maxSpeed : rb.velocity;
     }
 
     void ResetBall()
